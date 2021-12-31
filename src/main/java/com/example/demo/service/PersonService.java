@@ -14,52 +14,65 @@ import com.example.demo.repository.IPersonRepository;
 public class PersonService implements IPersonService {
 
 	@Autowired
-	private IPersonRepository personRepository;
+	private IPersonRepository presonRepository;
 
 	/**
-	 * @param PersonDTO
-	 * @return : PersonData
+	 * Call Get method
+	 * 
+	 * @return : Contact details of the person
+	 */
+	@Override
+	public List<PersonData> getPersonData() {
+		return presonRepository.findAll();
+	}
+
+	/**
+	 * Call Get method
+	 * 
+	 * @param id : contact Id
+	 * @return : Contact details of the person
+	 */
+	@Override
+	public PersonData getPersonDataById(int id) {
+		return presonRepository.findById((long) id).get();
+	}
+
+	/**
+	 * Call post method to add details
+	 * 
+	 * @param personDTO : details id, Firstname, Lastname, Address, City & phoneNum
+	 * @return : details
 	 */
 	@Override
 	public PersonData createPersonData(PersonDTO personDTO) {
 		PersonData contactData = null;
-		contactData = new PersonData(1, personDTO);
-		return personRepository.save(contactData);
+		contactData = new PersonData(personDTO);
+		return presonRepository.save(contactData);
 	}
 
 	/**
-	 * @param PersonDTO
-	 * @return : PersonData
+	 * Call put method to update details
+	 * 
+	 * @param personDTO : person details
+	 * @return : details
 	 */
 	@Override
-	public PersonData updatePersonDta(long id, PersonDTO personDTO) {
-		PersonData personData = this.getPersonDataById(id);
-		personData.updatePersonData(personDTO);
-		return personRepository.save(personData);
+	public PersonData updatePersonData(int id, PersonDTO personDTO) {
+		PersonData contactData = this.getPersonDataById(id);
+		contactData.updatePersonData(personDTO);
+		return presonRepository.save(contactData);
 	}
 
 	/**
-	 * @param PersonDTO
-	 * @return : PersonData
+	 * Call delete method to remove address book details
+	 * 
+	 * @param id : contact id
+	 * @return : contact id which is deleted
 	 */
 	@Override
-	public List<PersonData> getPersonData() {
-		return personRepository.findAll();
-	}
-
-	/**
-	 * @param PersonDTO
-	 * @return : PersonData
-	 */
-	@Override
-	public PersonData getPersonDataById(long id) {
-		return personRepository.findById(id).get();
-	}
-
-	@Override
-	public void deletePersonData(long id) {
-		PersonData personData = this.getPersonDataById(id);
-		personRepository.delete(personData);
+	public void deletePersonData(int id) {
+		PersonData contactData = this.getPersonDataById(id);
+		presonRepository.delete(contactData);
 	}
 
 }

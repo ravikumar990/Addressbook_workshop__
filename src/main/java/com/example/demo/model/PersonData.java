@@ -1,54 +1,55 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.example.demo.dto.PersonDTO;
 
 import lombok.Data;
-
-/**
- * @Data : Auto-generated getters and setters Methods, constructor And toString
- *
- */
+@Entity
+@Table(name="person_data")
 public @Data class PersonData {
-
-	private long personId;
-	private String fName;
-	private String lName;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "person_id")
+	private int personId;
+	
+	private String firstName;
+	private String lastName;
 	private String gender;
-	private long phoneNumber;
+	private long phoneNum;
 	private String email;
-	private String address;
 	private String city;
 	private String state;
 	private String country;
+	private String address;
 	private String profilePic;
-
-	public PersonData(long personId, PersonDTO personDTO) {
-		super();
-		this.personId = personId;
-		this.fName = personDTO.fName;
-		this.lName = personDTO.lName;
-		this.gender = personDTO.gender;
-		this.phoneNumber = personDTO.phoneNumber;
-		this.email = personDTO.email;
-		this.address = personDTO.address;
-		this.city = personDTO.city;
-		this.state = personDTO.state;
-		this.country = personDTO.country;
-		this.profilePic = personDTO.profilePic;
+	
+	
+	public PersonData() {}
+	
+	public PersonData(PersonDTO personDTO) {
+		this.updatePersonData(personDTO);
 	}
+
 
 	public void updatePersonData(PersonDTO personDTO) {
-		this.fName = personDTO.fName;
-		this.lName = personDTO.lName;
+		this.firstName = personDTO.fName;
+		this.lastName = personDTO.lName;
 		this.gender = personDTO.gender;
-		this.phoneNumber = personDTO.phoneNumber;
+		this.phoneNum = personDTO.phoneNumber;
 		this.email = personDTO.email;
 		this.address = personDTO.address;
 		this.city = personDTO.city;
 		this.state = personDTO.state;
 		this.country = personDTO.country;
 		this.profilePic = personDTO.profilePic;
-
+		
 	}
-
+	
 }

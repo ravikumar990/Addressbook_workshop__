@@ -10,13 +10,12 @@ import com.example.demo.model.PersonData;
 @Service
 public interface IPersonService {
 
-	PersonData createPersonData(PersonDTO personDTO);
-
-	PersonData updatePersonDta(long id, PersonDTO personDTO);
-
 	List<PersonData> getPersonData();
-
-	PersonData getPersonDataById(long id);
-
-	void deletePersonData(long id);
+	PersonData getPersonDataById(int id);
+	
+	PersonData createPersonData(PersonDTO personDTO);
+	
+	PersonData updatePersonData( int id,PersonDTO personDTO);
+	
+	void deletePersonData(int id);
 }
