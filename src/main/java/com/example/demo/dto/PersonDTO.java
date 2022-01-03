@@ -8,8 +8,8 @@ import lombok.Data;
  */
 public @Data class PersonDTO {
 
-	public String fName;
-	public String lName;
+	public String firstName;
+	public String lastName;
 	public String gender;
 	public long phoneNumber;
 	public String email;
@@ -18,7 +18,6 @@ public @Data class PersonDTO {
 	public String state;
 	public String country;
 	public String profilePic;
-	
-	
+
 
 }

@@ -5,51 +5,62 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.dto.PersonDTO;
 
 import lombok.Data;
+
+/**
+ * @Entity : specifies class is entity
+ * @Table : table name
+ * @Data : Auto Generate getters and setters, constructor, toString
+ */
 @Entity
-@Table(name="person_data")
+@Table(name = "person_data")
 public @Data class PersonData {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "person_id")
 	private int personId;
-	
-	private String firstName;
-	private String lastName;
+	private String fName;
+	private String lName;
 	private String gender;
-	private long phoneNum;
+	private long phoneNumber;
 	private String email;
+	private String address;
 	private String city;
 	private String state;
 	private String country;
-	private String address;
 	private String profilePic;
 	
-	
-	public PersonData() {}
-	
+	@ManyToOne
+	@JoinColumn(name = "add_id", referencedColumnName = "book_id")
+	private AddressBookModel addressBook;
+
+	public PersonData() {
+		super();
+	}
+
 	public PersonData(PersonDTO personDTO) {
+		super();
 		this.updatePersonData(personDTO);
 	}
 
-
 	public void updatePersonData(PersonDTO personDTO) {
-		this.firstName = personDTO.fName;
-		this.lastName = personDTO.lName;
+		this.fName = personDTO.firstName;
+		this.lName = personDTO.lastName;
 		this.gender = personDTO.gender;
-		this.phoneNum = personDTO.phoneNumber;
+		this.phoneNumber = personDTO.phoneNumber;
 		this.email = personDTO.email;
 		this.address = personDTO.address;
 		this.city = personDTO.city;
 		this.state = personDTO.state;
 		this.country = personDTO.country;
 		this.profilePic = personDTO.profilePic;
-		
+
 	}
-	
 }
