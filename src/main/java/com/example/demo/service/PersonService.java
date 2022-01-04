@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.PersonDTO;
+import com.example.demo.expection.PersonException;
 import com.example.demo.model.AddressBookModel;
 import com.example.demo.model.PersonData;
 import com.example.demo.repository.IAddressBookRepository;
@@ -68,9 +69,9 @@ public class PersonService implements IPersonService {
 	 */
 	@Override
 	public PersonData getPersonDataById(int addressbookId, int personId) {
-		return personRepository.findById((long) personId).get();
-
-	} 
+		return personRepository.findById((long) personId)
+				.orElseThrow(() -> new PersonException("User with User id " + personId + " does not exist !..."));
+	}
 
 	/**
 	 * @param id

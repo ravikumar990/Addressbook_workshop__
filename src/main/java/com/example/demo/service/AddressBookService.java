@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AddressBookDTO;
+import com.example.demo.expection.PersonException;
 import com.example.demo.model.AddressBookModel;
 import com.example.demo.repository.IAddressBookRepository;
 
@@ -58,7 +59,8 @@ public class AddressBookService implements IAddressBookService {
 	 */
 	@Override
 	public AddressBookModel getAddressBookDataById(int addressbookId) {
-		return addressBook.findById(addressbookId).get();
+		return addressBook.findById(addressbookId).orElseThrow(
+				() -> new PersonException("address book with id " + addressbookId + " does not exist !..."));
 	}
 
 	/**
